@@ -1,2 +1,18 @@
-* {
+body {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  font-family: "Cousine", monospace;
+  font-size: 3vh;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+#calc {
+  display: inline-grid;
+  grid-template-columns: repeat(25, auto);
+  grid-template-rows: repeat(20, auto);
+  gap: 0;
 }
