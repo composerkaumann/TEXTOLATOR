@@ -29,7 +29,7 @@ function makeBoxes() {
   const horLowLine = [];
   const horHiLine = [];
 
-  for (let i = 25; i < 475; i) {
+  for (let i = 25; i < 475; ) {
     verticalLine.push(i);
     i = i + 24;
     verticalLine.push(i);
@@ -41,7 +41,7 @@ function makeBoxes() {
     i = i + 1;
   }
   verticalLine.push(127, 131, 132, 136);
-  verticalLine.push(202, 206, 207, 211, 212, 216, 217, 221);
+
   for (let i = 1; i < 24; i++) {
     horLowLine.push(i);
   }
@@ -56,6 +56,12 @@ function makeBoxes() {
   for (let i = 476; i < 499; i++) {
     horHiLine.push(i);
   }
+
+  const vertAdd = [202, 206, 207, 211, 212, 216, 218, 222];
+  for (let i = 0; i < 4; i++) {
+    verticalLine.push(...vertAdd.map((v) => v + 75 * i));
+  }
+
   const vertElements = verticalLine.map((id) => document.getElementById(id));
   vertElements.forEach((occurrence) => {
     occurrence.textContent = "\u007C";
