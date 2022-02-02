@@ -10,12 +10,11 @@ function generateDivs() {
   for (let y = 0; y < 500; y++) {
     const cell = document.createElement("div");
     cell.setAttribute("id", `${y}`);
-    cell.setAttribute("class", "cell");
     document.getElementById("calc").appendChild(cell);
   }
 }
 generateDivs();
-
+/** Filling empty cells with whitespaces is unnecessary.
 function whiteSpace2Empty() {
   const emptyCell = document.getElementsByClassName("cell");
   for (let i = 0; i < emptyCell.length; i++) {
@@ -23,6 +22,26 @@ function whiteSpace2Empty() {
   }
 }
 whiteSpace2Empty();
+**/
+
+document.getElementById("129").textContent = "C";
+document.getElementById("134").textContent = "B";
+document.getElementById("204").textContent = "7";
+document.getElementById("209").textContent = "8";
+document.getElementById("214").textContent = "9";
+document.getElementById("220").textContent = "+";
+document.getElementById("279").textContent = "4";
+document.getElementById("284").textContent = "5";
+document.getElementById("289").textContent = "6";
+document.getElementById("295").textContent = "-";
+document.getElementById("354").textContent = "1";
+document.getElementById("359").textContent = "2";
+document.getElementById("364").textContent = "3";
+document.getElementById("370").textContent = "*";
+document.getElementById("429").textContent = "0";
+document.getElementById("434").textContent = ".";
+document.getElementById("439").textContent = "=";
+document.getElementById("445").textContent = "/";
 
 function makeBoxes() {
   const verticalLine = [];
@@ -81,6 +100,10 @@ function makeBoxes() {
     horHiLine.push(...horHiAdd.map((v) => v + 75 * i));
   }
 
+  for (let i = 53; i < 72; i++) {
+    document.getElementById(i).setAttribute("class", "display");
+  }
+
   const vertElements = verticalLine.map((id) => document.getElementById(id));
   vertElements.forEach((occurrence) => {
     occurrence.textContent = "\u007C";
@@ -99,5 +122,4 @@ function makeBoxes() {
     occurrence.setAttribute("class", "horHi");
   });
 }
-
 makeBoxes();
