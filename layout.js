@@ -42,11 +42,22 @@ function makeBoxes() {
   }
   verticalLine.push(127, 131, 132, 136);
 
+  const vertAdd = [202, 206, 207, 211, 212, 216, 218, 222];
+  for (let i = 0; i < 4; i++) {
+    verticalLine.push(...vertAdd.map((v) => v + 75 * i));
+  }
+
   for (let i = 1; i < 24; i++) {
     horLowLine.push(i);
   }
   for (let i = 28; i < 47; i++) {
     horLowLine.push(i);
+  }
+
+  horLowLine.push(103, 104, 105, 108, 109, 110);
+  const horLoAdd = [178, 179, 180, 183, 184, 185, 188, 189, 190, 194, 195, 196];
+  for (let i = 0; i < 4; i++) {
+    horLowLine.push(...horLoAdd.map((v) => v + 75 * i));
   }
 
   for (let i = 78; i < 97; i++) {
@@ -57,14 +68,16 @@ function makeBoxes() {
     horHiLine.push(i);
   }
 
-  const vertAdd = [202, 206, 207, 211, 212, 216, 218, 222];
+  horHiLine.push(153, 154, 155, 158, 159, 160);
+  const horHiAdd = [228, 229, 230, 233, 234, 235, 238, 239, 240, 244, 245, 246];
   for (let i = 0; i < 4; i++) {
-    verticalLine.push(...vertAdd.map((v) => v + 75 * i));
+    horHiLine.push(...horHiAdd.map((v) => v + 75 * i));
   }
 
   const vertElements = verticalLine.map((id) => document.getElementById(id));
   vertElements.forEach((occurrence) => {
     occurrence.textContent = "\u007C";
+    occurrence.setAttribute("class", "vert");
   });
 
   const horLowElements = horLowLine.map((id) => document.getElementById(id));
