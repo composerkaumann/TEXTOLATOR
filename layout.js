@@ -28,6 +28,13 @@ function makeBoxes() {
   const verticalLine = [];
   const horLowLine = [];
   const horHiLine = [];
+  const title = ["T", "E", "X", "T", "O", "L", "A", "T", "O", "R"];
+
+  for (let i = 0; i < title.length; i++) {
+    const titleDiv = document.getElementById(138 + i);
+    titleDiv.textContent = title[0 + i];
+    titleDiv.setAttribute("class", "title");
+  }
 
   for (let i = 25; i < 475; ) {
     verticalLine.push(i);
@@ -83,11 +90,13 @@ function makeBoxes() {
   const horLowElements = horLowLine.map((id) => document.getElementById(id));
   horLowElements.forEach((occurrence) => {
     occurrence.textContent = "\u005F";
+    occurrence.setAttribute("class", "horLo");
   });
 
   const horHiElements = horHiLine.map((id) => document.getElementById(id));
   horHiElements.forEach((occurrence) => {
     occurrence.textContent = "\u203E";
+    occurrence.setAttribute("class", "horHi");
   });
 }
 
