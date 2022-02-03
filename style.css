@@ -17,3 +17,6 @@ body {
   grid-template-rows: repeat(20, auto);
   gap: 0;
 }
+
+.vert {
+}

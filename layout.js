@@ -14,34 +14,36 @@ function generateDivs() {
   }
 }
 generateDivs();
-/** Filling empty cells with whitespaces is unnecessary.
-function whiteSpace2Empty() {
-  const emptyCell = document.getElementsByClassName("cell");
-  for (let i = 0; i < emptyCell.length; i++) {
-    emptyCell[i].textContent = "\u00A0";
-  }
-}
-whiteSpace2Empty();
-**/
 
-document.getElementById("129").textContent = "C";
-document.getElementById("134").textContent = "B";
-document.getElementById("204").textContent = "7";
-document.getElementById("209").textContent = "8";
-document.getElementById("214").textContent = "9";
-document.getElementById("220").textContent = "+";
-document.getElementById("279").textContent = "4";
-document.getElementById("284").textContent = "5";
-document.getElementById("289").textContent = "6";
-document.getElementById("295").textContent = "-";
-document.getElementById("354").textContent = "1";
-document.getElementById("359").textContent = "2";
-document.getElementById("364").textContent = "3";
-document.getElementById("370").textContent = "*";
-document.getElementById("429").textContent = "0";
-document.getElementById("434").textContent = ".";
-document.getElementById("439").textContent = "=";
-document.getElementById("445").textContent = "/";
+function createBtn(middleDivId, btnValue) {
+  document.getElementById(middleDivId).textContent = btnValue;
+  const btnDivs = [middleDivId - 1, middleDivId, middleDivId + 1];
+  const btnElements = btnDivs.map((id) => document.getElementById(id));
+  btnElements.forEach((occ) => {
+    occ.classList.add("btn", btnValue);
+    occ.addEventListener("mousedown", function () {
+      btnEvent(btnValue);
+    });
+  });
+}
+createBtn(129, "C");
+createBtn(134, "\u00B1");
+createBtn(204, "7");
+createBtn(209, "8");
+createBtn(214, "9");
+createBtn(220, "+");
+createBtn(279, "4");
+createBtn(284, "5");
+createBtn(289, "6");
+createBtn(295, "\u002D");
+createBtn(354, "1");
+createBtn(359, "2");
+createBtn(364, "3");
+createBtn(370, "\u002A");
+createBtn(429, "0");
+createBtn(434, "\u002E");
+createBtn(439, "\u003D");
+createBtn(445, "\u002F");
 
 function makeBoxes() {
   const verticalLine = [];
