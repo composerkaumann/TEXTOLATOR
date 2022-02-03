@@ -20,7 +20,7 @@ function createBtn(middleDivId, btnValue) {
   const btnDivs = [middleDivId - 1, middleDivId, middleDivId + 1];
   const btnElements = btnDivs.map((id) => document.getElementById(id));
   btnElements.forEach((occ) => {
-    occ.classList.add("btn", btnValue);
+    occ.classList.add("btn", `butt${btnValue}`);
     occ.addEventListener("mousedown", function () {
       btnEvent(btnValue);
     });
@@ -28,19 +28,19 @@ function createBtn(middleDivId, btnValue) {
 }
 createBtn(129, "C");
 createBtn(134, "\u00B1");
-createBtn(204, "7");
-createBtn(209, "8");
-createBtn(214, "9");
-createBtn(220, "+");
-createBtn(279, "4");
-createBtn(284, "5");
-createBtn(289, "6");
+createBtn(204, 7);
+createBtn(209, 8);
+createBtn(214, 9);
+createBtn(220, "\u002B");
+createBtn(279, 4);
+createBtn(284, 5);
+createBtn(289, 6);
 createBtn(295, "\u002D");
-createBtn(354, "1");
-createBtn(359, "2");
-createBtn(364, "3");
+createBtn(354, 1);
+createBtn(359, 2);
+createBtn(364, 3);
 createBtn(370, "\u002A");
-createBtn(429, "0");
+createBtn(429, 0);
 createBtn(434, "\u002E");
 createBtn(439, "\u003D");
 createBtn(445, "\u002F");
