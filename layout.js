@@ -106,22 +106,16 @@ function makeBoxes() {
     document.getElementById(i).setAttribute("class", "display");
   }
 
-  const vertElements = verticalLine.map((id) => document.getElementById(id));
-  vertElements.forEach((occurrence) => {
-    occurrence.textContent = "\u007C";
-    occurrence.setAttribute("class", "vert");
-  });
+  populateBox(verticalLine, "\u007C", "vert");
+  populateBox(horLowLine, "\u005F", "horLo");
+  populateBox(horHiLine, "\u203E", "horHi");
+}
 
-  const horLowElements = horLowLine.map((id) => document.getElementById(id));
-  horLowElements.forEach((occurrence) => {
-    occurrence.textContent = "\u005F";
-    occurrence.setAttribute("class", "horLo");
-  });
-
-  const horHiElements = horHiLine.map((id) => document.getElementById(id));
-  horHiElements.forEach((occurrence) => {
-    occurrence.textContent = "\u203E";
-    occurrence.setAttribute("class", "horHi");
+function populateBox(arr, content, clazz) {
+  const elements = arr.map((id) => document.getElementById(id));
+  elements.forEach((occurrence) => {
+    occurrence.textContent = content;
+    occurrence.setAttribute("class", clazz);
   });
 }
 makeBoxes();
