@@ -1,7 +1,14 @@
 "use strict";
 //
+const data = {
+  numbers: [0],
+  entry: true,
+};
+
 let display = [0];
-console.table(display + "; " + display.length + "; " + display[0]);
+console.table(
+  data.numbers + "; " + data.numbers.length + "; " + data.numbers[0]
+);
 //
 function btnEvent(btnValue) {
   if (typeof btnValue === "number") {
@@ -20,15 +27,20 @@ function btnEvent(btnValue) {
 }
 //
 function populateDisplay(num) {
-  if (display.length === 1 && display[0] === 0 && num !== "\u002E") {
-    display = [];
+  if (data.numbers.length === 1 && data.numbers[0] === 0 && num !== "\u002E") {
+    data.numbers = [];
   }
-  display.push(num);
-  if (display.length > 9) {
-    display.length = 9;
+  data.numbers.push(num);
+  if (data.numbers.length > 9) {
+    data.numbers.length = 9;
   }
   console.table(
-    "cont:" + display + "; length:" + display.length + "; pos[0]:" + display[0]
+    "cont:" +
+      data.numbers +
+      "; length:" +
+      data.numbers.length +
+      "; pos[0]:" +
+      data.numbers[0]
   );
 }
 //

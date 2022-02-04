@@ -28,7 +28,7 @@ function createBtn(middleDivId, btnValue) {
   const btnDivs = [middleDivId - 1, middleDivId, middleDivId + 1];
   const btnElements = btnDivs.map((id) => document.getElementById(id));
   btnElements.forEach((occ) => {
-    occ.classList.add("btn", `butt${btnValue}`);
+    occ.classList.add("btn");
     occ.addEventListener("mousedown", function () {
       btnEvent(btnValue);
     });
@@ -52,8 +52,6 @@ createBtn(429, 0);
 createBtn(434, "\u002E");
 createBtn(439, "\u003D");
 createBtn(445, "\u002F");
-//
-
 //
 function calcTitle(start) {
   const title = ["T", "E", "X", "T", "O", "L", "A", "T", "O", "R"];
