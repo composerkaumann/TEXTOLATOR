@@ -29,9 +29,6 @@ function createBtn(middleDivId, btnValue) {
   const btnElements = btnDivs.map((id) => document.getElementById(id));
   btnElements.forEach((occ) => {
     occ.classList.add("btn");
-    occ.addEventListener("mousedown", function () {
-      btnEvent(btnValue);
-    });
   });
 }
 createBtn(129, "\u0043");

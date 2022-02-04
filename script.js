@@ -53,15 +53,19 @@ document.body.addEventListener(
     if (evt.target.className === "btn") {
       const twoLeft = document.getElementById(+evt.target.id - 2);
       const oneLeft = document.getElementById(+evt.target.id - 1);
+      const clicked = document.getElementById(+evt.target.id);
       const oneRight = document.getElementById(+evt.target.id + 1);
       const twoRight = document.getElementById(+evt.target.id + 2);
       if (twoLeft.classList.contains("btn")) {
         twoLeft.classList.add("clicked");
         oneLeft.classList.add("clicked");
+        clicked.classList.add("clicked");
       } else if (oneLeft.classList.contains("btn")) {
         oneLeft.classList.add("clicked");
+        clicked.classList.add("clicked");
         oneRight.classList.add("clicked");
       } else {
+        clicked.classList.add("clicked");
         oneRight.classList.add("clicked");
         twoRight.classList.add("clicked");
       }
@@ -76,6 +80,7 @@ document.body.addEventListener(
     const n = data.clickTargetID;
     document.getElementById(n - 2).classList.remove("clicked");
     document.getElementById(n - 1).classList.remove("clicked");
+    document.getElementById(n).classList.remove("clicked");
     document.getElementById(n + 1).classList.remove("clicked");
     document.getElementById(n + 2).classList.remove("clicked");
   },
