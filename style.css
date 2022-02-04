@@ -23,7 +23,8 @@ body {
 .vert {
 }
 
-.btn:active {
+.btn:active,
+.clicked {
   background: black;
   color: white;
 }

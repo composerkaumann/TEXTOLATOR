@@ -3,6 +3,8 @@
 const data = {
   numbers: [0],
   entry: true,
+  negative: false,
+  clickTargetID: "",
 };
 
 let display = [0];
@@ -44,3 +46,38 @@ function populateDisplay(num) {
   );
 }
 //
+document.body.addEventListener(
+  "mousedown",
+  function (evt) {
+    data.clickTargetID = +evt.target.id;
+    if (evt.target.className === "btn") {
+      const twoLeft = document.getElementById(+evt.target.id - 2);
+      const oneLeft = document.getElementById(+evt.target.id - 1);
+      const oneRight = document.getElementById(+evt.target.id + 1);
+      const twoRight = document.getElementById(+evt.target.id + 2);
+      if (twoLeft.classList.contains("btn")) {
+        twoLeft.classList.add("clicked");
+        oneLeft.classList.add("clicked");
+      } else if (oneLeft.classList.contains("btn")) {
+        oneLeft.classList.add("clicked");
+        oneRight.classList.add("clicked");
+      } else {
+        oneRight.classList.add("clicked");
+        twoRight.classList.add("clicked");
+      }
+    }
+  },
+  false
+);
+//
+document.body.addEventListener(
+  "mouseup",
+  function () {
+    const n = data.clickTargetID;
+    document.getElementById(n - 2).classList.remove("clicked");
+    document.getElementById(n - 1).classList.remove("clicked");
+    document.getElementById(n + 1).classList.remove("clicked");
+    document.getElementById(n + 2).classList.remove("clicked");
+  },
+  false
+);
