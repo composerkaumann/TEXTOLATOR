@@ -1,20 +1,28 @@
 "use strict";
-
-function generateDivs() {
+//
+function generateDivs(quantity) {
   const container = document.createElement("div");
   container.setAttribute("id", "container");
   const calc = document.createElement("div");
   calc.setAttribute("id", "calc");
   container.appendChild(calc);
   document.body.appendChild(container);
-  for (let y = 0; y < 500; y++) {
+  for (let y = 0; y < quantity; y++) {
     const cell = document.createElement("div");
     cell.setAttribute("id", `${y}`);
     document.getElementById("calc").appendChild(cell);
   }
 }
-generateDivs();
-
+generateDivs(500);
+//
+function displayDivClass(start) {
+  for (let i = 0, len = 10; i < len; i++) {
+    const titleDiv = document.getElementById(start + i);
+    titleDiv.setAttribute("class", "display");
+  }
+}
+displayDivClass(53);
+//
 function createBtn(middleDivId, btnValue) {
   document.getElementById(middleDivId).textContent = btnValue;
   const btnDivs = [middleDivId - 1, middleDivId, middleDivId + 1];
@@ -26,7 +34,7 @@ function createBtn(middleDivId, btnValue) {
     });
   });
 }
-createBtn(129, "C");
+createBtn(129, "\u0043");
 createBtn(134, "\u00B1");
 createBtn(204, 7);
 createBtn(209, 8);
@@ -44,18 +52,23 @@ createBtn(429, 0);
 createBtn(434, "\u002E");
 createBtn(439, "\u003D");
 createBtn(445, "\u002F");
+//
 
+//
+function calcTitle(start) {
+  const title = ["T", "E", "X", "T", "O", "L", "A", "T", "O", "R"];
+  for (let i = 0; i < title.length; i++) {
+    const titleDiv = document.getElementById(start + i);
+    titleDiv.textContent = title[0 + i];
+    titleDiv.setAttribute("class", "title");
+  }
+}
+calcTitle(138);
+//
 function makeBoxes() {
   const verticalLine = [];
   const horLowLine = [];
   const horHiLine = [];
-  const title = ["T", "E", "X", "T", "O", "L", "A", "T", "O", "R"];
-
-  for (let i = 0; i < title.length; i++) {
-    const titleDiv = document.getElementById(138 + i);
-    titleDiv.textContent = title[0 + i];
-    titleDiv.setAttribute("class", "title");
-  }
 
   for (let i = 25; i < 475; ) {
     verticalLine.push(i);
@@ -110,7 +123,7 @@ function makeBoxes() {
   populateBox(horLowLine, "\u005F", "horLo");
   populateBox(horHiLine, "\u203E", "horHi");
 }
-
+//
 function populateBox(arr, content, clazz) {
   const elements = arr.map((id) => document.getElementById(id));
   elements.forEach((occurrence) => {

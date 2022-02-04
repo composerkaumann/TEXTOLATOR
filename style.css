@@ -4,9 +4,9 @@ body {
   width: 100vw;
   background: white;
   color: black;
-  font-family: "Cousine", monospace;
+  font-family: "Lucida console", monospace;
   font-size: 3vh;
-  font-weight: 500;
+  font-weight: 400;
   padding: 0;
   margin: 0;
   align-items: center;
@@ -26,4 +26,15 @@ body {
 .btn:active {
   background: black;
   color: white;
+}
+
+.vert,
+.horLo,
+.horHi,
+.title {
+  font-weight: 100;
+}
+
+.display {
+  font-weight: 800;
 }
