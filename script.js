@@ -5,31 +5,44 @@ const data = {
   previous: [],
   entry: true,
   negative: false,
+  operator: null,
   clickTargetID: null,
 };
 //
-let display = [0];
-console.table(
-  data.numbers + "; " + data.numbers.length + "; " + data.numbers[0]
-);
+// console.table(data.numbers + "; " + data.numbers.length + "; " + data.numbers[0]);
 //
 function btnEvent(btnValue) {
   if (typeof btnValue === "number") {
-    console.table(btnValue + ", number");
-    populateDisplay(btnValue);
+    //   console.table(btnValue + ", number");
+    populateDisplayObj(btnValue);
   } else if (btnValue === "\u0043") {
-    console.table(btnValue + ", clear");
+    // console.table(btnValue + ", clear");
+    clearAll();
   } else if (btnValue === "\u00B1") {
-    console.table(btnValue + ", plusmin");
+    // console.table(btnValue + ", plusmin");
+    data.negative = !data.negative;
+    showNumbers();
   } else if (btnValue === "\u002E" && !data.numbers.includes("\u002E")) {
-    console.table(btnValue + ", dot");
-    populateDisplay(btnValue);
+    //  console.table(btnValue + ", dot");
+    populateDisplayObj(btnValue);
   } else {
-    console.table(btnValue + ", operator");
+    //  console.table(btnValue + ", operator");
   }
 }
 //
-function populateDisplay(num) {
+function showNumbers() {
+  const startDiv = 55;
+  for (let i = 0; i < 9; i++) {
+    document.getElementById(startDiv + i * 2).textContent = data.numbers[0 + i];
+  }
+  if (data.negative === true) {
+    document.getElementById(53).textContent = "-";
+  } else {
+    document.getElementById(53).textContent = "";
+  }
+}
+//
+function populateDisplayObj(num) {
   if (data.numbers.length === 1 && data.numbers[0] === 0 && num !== "\u002E") {
     data.numbers = [];
   }
@@ -37,7 +50,17 @@ function populateDisplay(num) {
   if (data.numbers.length > 9) {
     data.numbers.length = 9;
   }
-  console.table("cont:" + data.numbers + "; length:" + data.numbers.length);
+  // console.table("cont:" + data.numbers + "; length:" + data.numbers.length);
+  showNumbers();
+}
+//
+function clearAll() {
+  data.numbers = [0];
+  data.previous = [];
+  data.entry = true;
+  data.negative = false;
+  data.operator = null;
+  showNumbers();
 }
 //
 document.getElementById("calc").addEventListener(
@@ -83,3 +106,4 @@ document.body.addEventListener(
   },
   false
 );
+showNumbers();
