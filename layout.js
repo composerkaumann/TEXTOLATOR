@@ -13,7 +13,7 @@ function generateDivs(quantity) {
     document.getElementById("calc").appendChild(cell);
   }
 }
-generateDivs(500);
+generateDivs(499);
 //
 function displayDivClass(start) {
   for (let i = 0, len = 10; i < len; i++) {
@@ -29,6 +29,13 @@ function createBtn(middleDivId, btnValue) {
   const btnElements = btnDivs.map((id) => document.getElementById(id));
   btnElements.forEach((occ) => {
     occ.classList.add("btn");
+    occ.addEventListener(
+      "mousedown",
+      function () {
+        btnEvent(btnValue);
+      },
+      false
+    );
   });
 }
 createBtn(129, "\u0043");
@@ -121,9 +128,9 @@ function makeBoxes() {
 //
 function populateBox(arr, content, clazz) {
   const elements = arr.map((id) => document.getElementById(id));
-  elements.forEach((occurrence) => {
-    occurrence.textContent = content;
-    occurrence.setAttribute("class", clazz);
+  elements.forEach((occ) => {
+    occ.textContent = content;
+    occ.setAttribute("class", clazz);
   });
 }
 makeBoxes();
