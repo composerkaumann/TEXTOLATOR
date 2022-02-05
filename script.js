@@ -31,9 +31,10 @@ function btnEvent(btnValue) {
 }
 //
 function showNumbers() {
-  const startDiv = 55;
+  const startDiv = 71;
   for (let i = 0; i < 9; i++) {
-    document.getElementById(startDiv + i * 2).textContent = data.numbers[0 + i];
+    document.getElementById(startDiv - i * 2).textContent =
+      data.numbers[data.numbers.length - 1 - i];
   }
   if (data.negative === true) {
     document.getElementById(53).textContent = "-";
@@ -94,7 +95,11 @@ document.getElementById("calc").addEventListener(
 document.body.addEventListener(
   "mouseup",
   function () {
-    if (data.clickTargetID !== null) {
+    if (
+      data.clickTargetID !== null &&
+      data.clickTargetID < 447 &&
+      data.clickTargetID > 126
+    ) {
       const n = data.clickTargetID;
       document.getElementById(n - 2).classList.remove("clicked");
       document.getElementById(n - 1).classList.remove("clicked");

@@ -13,7 +13,7 @@ function generateDivs(quantity) {
     document.getElementById("calc").appendChild(cell);
   }
 }
-generateDivs(499);
+generateDivs(500);
 //
 function displayDivClass(start) {
   for (let i = 0, len = 10; i < len; i++) {
