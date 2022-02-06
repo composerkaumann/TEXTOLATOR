@@ -1,5 +1,7 @@
 "use strict";
 //
+// Define and generate all divs.
+//
 function generateDivs(quantity) {
   const container = document.createElement("div");
   container.setAttribute("id", "container");
@@ -15,6 +17,8 @@ function generateDivs(quantity) {
 }
 generateDivs(500);
 //
+// Set class to calculator display divs.
+//
 function displayDivClass(start) {
   for (let i = 0, len = 10; i < len; i++) {
     const titleDiv = document.getElementById(start + i);
@@ -22,6 +26,8 @@ function displayDivClass(start) {
   }
 }
 displayDivClass(53);
+//
+// Define all button click areas that consist of 3 adjacent divs.
 //
 function createBtn(middleDivId, btnValue) {
   document.getElementById(middleDivId).textContent = btnValue;
@@ -57,6 +63,8 @@ createBtn(434, "\u002E");
 createBtn(439, "\u003D");
 createBtn(445, "\u002F");
 //
+// Define the title and spread it to divs.
+//
 function calcTitle(start) {
   const title = ["T", "E", "X", "T", "O", "L", "A", "T", "O", "R"];
   for (let i = 0; i < title.length; i++) {
@@ -66,6 +74,8 @@ function calcTitle(start) {
   }
 }
 calcTitle(138);
+//
+// Define the divs for visual borders for calc, display, buttons.
 //
 function makeBoxes() {
   const verticalLine = [];
@@ -125,6 +135,8 @@ function makeBoxes() {
   populateBox(horLowLine, "\u005F", "horLo");
   populateBox(horHiLine, "\u203E", "horHi");
 }
+//
+// Populate the divs defined for visual of calc, display, buttons.
 //
 function populateBox(arr, content, clazz) {
   const elements = arr.map((id) => document.getElementById(id));

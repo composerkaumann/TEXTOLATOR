@@ -1,14 +1,15 @@
 "use strict";
 //
 const data = {
-  numbers: [0],
-  previousNum: [],
+  displayArr: [0],
+  num1: null,
+  num2: null,
   negative: false,
-  operator: null,
+  op1: null,
+  op2: null,
+  //  entry: true,
   clickTargetID: null,
 };
-//
-function calculate() {}
 //
 function btnEvent(btnValue) {
   if (typeof btnValue === "number") {
@@ -18,19 +19,33 @@ function btnEvent(btnValue) {
   } else if (btnValue === "\u00B1") {
     data.negative = !data.negative;
     showNumbers();
-  } else if (btnValue === "\u002E" && !data.numbers.includes("\u002E")) {
+  } else if (btnValue === "\u002E" && !data.displayArr.includes("\u002E")) {
     populateDisplayObj(btnValue);
   } else {
-    data.operator = btnValue;
-    console.table(btnValue + ", operator");
+    data.op1 = btnValue;
+    calculate();
   }
+}
+//
+function populateDisplayObj(num) {
+  if (
+    data.displayArr.length === 1 &&
+    data.displayArr[0] === 0 &&
+    num !== "\u002E"
+  ) {
+    data.displayArr = [];
+  }
+  data.displayArr.push(num);
+  if (data.displayArr.length > 9) {
+    data.displayArr.length = 9;
+  }
+  showNumbers();
 }
 //
 function showNumbers() {
   for (let i = 0; i < 9; i++) {
     document.getElementById(71 - i * 2).textContent =
-      data.numbers[data.numbers.length - 1 - i];
-    console.log(+data.numbers.join("") + " " + typeof +data.numbers.join(""));
+      data.displayArr[data.displayArr.length - 1 - i];
   }
   if (data.negative === true) {
     document.getElementById(53).textContent = "-";
@@ -39,24 +54,58 @@ function showNumbers() {
   }
 }
 //
-function populateDisplayObj(num) {
-  if (data.numbers.length === 1 && data.numbers[0] === 0 && num !== "\u002E") {
-    data.numbers = [];
+function arrayToDecimal(arr) {
+  return !data.negative ? +arr.join("") : -Math.abs(+arr.join(""));
+}
+//
+function decimalToArray(decimal) {
+  if (decimal < 0) {
+    data.negative = true;
   }
-  data.numbers.push(num);
-  if (data.numbers.length > 9) {
-    data.numbers.length = 9;
+  const arr = Array.from(decimal.toString()).map(Number);
+  for (i = 0; i < arr.length; i++) {
+    if (isNaN(arr[i])) {
+      arr[i] = ".";
+    }
   }
+  data.displayArr = arr;
   showNumbers();
 }
 //
+function calculate() {
+  if (!data.op2) {
+    //
+  } else {
+    //
+  }
+}
+//
+function mathe(x, y) {
+  switch (data.op2) {
+    case "+":
+      return x + y;
+    case "-":
+      return x - y;
+    case "*":
+      return x * y;
+    case "/":
+      return x / y;
+    default:
+      return;
+  }
+}
+//
 function clearAll() {
-  data.numbers = [0];
-  data.previousNum = [];
+  data.displayArr = [0];
+  data.num1 = null;
+  data.num2 = null;
   data.negative = false;
-  data.operator = null;
+  data.op1 = null;
+  data.op2 = null;
   showNumbers();
 }
+//
+// Two functions to hilight 3 active button divs (and un-hilight).
 //
 document.getElementById("calc").addEventListener(
   "mousedown",
@@ -105,4 +154,7 @@ document.body.addEventListener(
   },
   false
 );
+//
+// The initial state of calc when loaded, shows zero.
+//
 showNumbers();
