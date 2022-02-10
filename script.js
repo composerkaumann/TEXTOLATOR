@@ -5,7 +5,6 @@ const data = {
   num1: null,
   num2: null,
   numRes: null,
-  negative: false,
   op: null,
   lastKey: null,
   clickTargetID: null,
@@ -15,44 +14,49 @@ function btnEvent(btnValue) {
   if (typeof btnValue === "number") {
     populateDisplayObj(btnValue);
     data.lastKey = "number";
-  } else if (btnValue === "\u0043") {
+  } else if (btnValue === "C") {
     clearAll(); // C
+    data.lastKey = "C";
   } else if (btnValue === "\u00B1" && data.lastKey === "number") {
-    data.negative = !data.negative; //plus-min
-    showNumbers();
-  } else if (btnValue === "\u002E" && !data.displayArr.includes("\u002E")) {
+    toggleNegative(); //plus-min
+    data.lastKey = "number";
+  } else if (btnValue === "." && !data.displayArr.includes(".")) {
     populateDisplayObj(btnValue); //decimal
-  } else if (btnValue === "\u003D") {
+  } else if (btnValue === "=") {
     equalBtn(btnValue); //equal
   } else {
     operatorBtn(btnValue); //one of 4 operators
   }
 }
 //
+function toggleNegative() {
+  if (!data.displayArr.includes("-")) {
+    data.displayArr.unshift("-");
+  } else {
+    data.displayArr.shift();
+  }
+  if (data.displayArr.length > 10) {
+    data.displayArr.length = 10;
+  }
+  showNumbers();
+}
+//
 function populateDisplayObj(num) {
-  if (
-    data.displayArr.length === 1 &&
-    data.displayArr[0] === 0 &&
-    num !== "\u002E"
-  ) {
+  if (data.displayArr.length === 1 && data.displayArr[0] === 0 && num !== ".") {
     data.displayArr = [];
   }
+
   data.displayArr.push(num);
-  if (data.displayArr.length > 9) {
-    data.displayArr.length = 9;
+  if (data.displayArr.length > 10) {
+    data.displayArr.length = 10;
   }
   showNumbers();
 }
 //
 function showNumbers() {
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 10; i++) {
     document.getElementById(71 - i * 2).textContent =
       data.displayArr[data.displayArr.length - 1 - i];
-  }
-  if (data.negative === true) {
-    document.getElementById(53).textContent = "-";
-  } else {
-    document.getElementById(53).textContent = "";
   }
 }
 //
@@ -67,7 +71,7 @@ function equalBtn(btnValue) {
   data.numRes = mathe(data.num2, data.num1, data.op);
   numberToDisplay();
   showNumbers();
-  data.displayArr = [];
+  //data.displayArr = [];
   data.lastKey = btnValue;
 }
 //
@@ -84,23 +88,20 @@ function operatorBtn(btnValue) {
   }
   showNumbers();
   data.displayArr = [];
-  data.op = btnValue;
   data.lastKey = btnValue;
+  data.op = btnValue;
 }
 //
 function displayToNumber() {
-  return !data.negative
-    ? +data.displayArr.join("")
-    : -Math.abs(+data.displayArr.join(""));
+  return +data.displayArr.join("");
 }
 //
 function numberToDisplay() {
-  if (data.numRes < 0) {
-    data.negative = true;
-  }
-  const arr = Array.from(Math.abs(data.numRes).toString()).map(Number);
+  const arr = Array.from(data.numRes.toString()).map(Number);
   for (let i = 0; i < arr.length; i++) {
-    if (isNaN(arr[i])) {
+    if (arr[i] == "-") {
+      arr[i] = "-";
+    } else if (isNaN(arr[i])) {
       arr[i] = ".";
     }
   }
@@ -110,15 +111,19 @@ function numberToDisplay() {
 function mathe(num2, num1, btnValue) {
   switch (btnValue) {
     case "+":
+      console.log(num2 + " " + num1 + " " + (num2 + num1));
       return num2 + num1;
     case "-":
+      console.log(num2 + " " + num1 + " " + num2 - num1);
       return num2 - num1;
     case "*":
+      console.log(num2 + " " + num1 + " " + num2 * num1);
       return num2 * num1;
     case "/":
+      console.log(num2 + " " + num1 + " " + num2 / num1);
       return num2 / num1;
     default:
-      return;
+      return null;
   }
 }
 //
@@ -127,7 +132,6 @@ function clearAll() {
   data.num1 = null;
   data.num2 = null;
   data.numRes = null;
-  data.negative = false;
   data.op = null;
   data.lastKey = null;
   showNumbers();
