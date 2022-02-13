@@ -11,7 +11,7 @@ const data = {
 //
 function btnEvent(btnValue) {
   if (typeof btnValue === "number") {
-    populateDisplayObj(btnValue);
+    populateDisplayArray(btnValue);
     data.lastKey = "num";
   } else if (btnValue === "C") {
     clearAll(); // C
@@ -20,7 +20,7 @@ function btnEvent(btnValue) {
     toggleNegative(); //plus-min
     data.lastKey = "num";
   } else if (btnValue === "." && !data.displayArr.includes(".")) {
-    populateDisplayObj(btnValue);
+    populateDisplayArray(btnValue);
     data.lastKey = "num";
   } else if (btnValue === "=") {
     equalBtn();
@@ -41,21 +41,23 @@ function toggleNegative() {
   if (data.displayArr.length > 10) {
     data.displayArr.length = 10;
   }
-  showNumbers();
+  refreshDisplay();
 }
 //
-function populateDisplayObj(num) {
+function populateDisplayArray(num) {
   if (data.displayArr.length === 1 && data.displayArr[0] === 0 && num !== ".") {
     data.displayArr = [];
+  } else if (num === ".") {
+    data.displayArr = [0];
   }
   data.displayArr.push(num);
   if (data.displayArr.length > 10) {
     data.displayArr.length = 10;
   }
-  showNumbers();
+  refreshDisplay();
 }
 //
-function showNumbers() {
+function refreshDisplay() {
   for (let i = 0; i < 10; i++) {
     document.getElementById(71 - i * 2).textContent =
       data.displayArr[data.displayArr.length - 1 - i];
@@ -76,7 +78,7 @@ function equalBtn() {
   }
   data.numRes = mathe();
   numberToDisplay();
-  showNumbers();
+  refreshDisplay();
   data.displayArr = [];
 }
 //
@@ -90,7 +92,7 @@ function operatorBtn() {
     data.numRes = displayToNumber();
   }
   numberToDisplay();
-  showNumbers();
+  refreshDisplay();
   data.displayArr = [];
 }
 //
@@ -120,6 +122,7 @@ function mathe() {
       result = data.numRes / data.num1;
       break;
   }
+  // must truncate / round
   return result;
 }
 //
@@ -129,7 +132,7 @@ function clearAll() {
   data.numRes = null;
   data.op = null;
   data.lastKey = null;
-  showNumbers();
+  refreshDisplay();
 }
 //
 // Two functions to hilight 3 active button divs (and un-hilight).
@@ -184,4 +187,4 @@ document.body.addEventListener(
 //
 // The initial state of calc when loaded, shows zero.
 //
-showNumbers();
+refreshDisplay();
