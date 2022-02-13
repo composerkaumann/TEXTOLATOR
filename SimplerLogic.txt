@@ -1,0 +1,21 @@
+num1  num2  numR
+1   + 2   = 3    +   // first number straight to numR and calc will be (numR = numR op num1). Num2 not needed.
+4         = 7    =   // repeating  = means that calc repeated numR op num1
+            11
+
+
+
+36   / 2  / 18
+3         * 6   +
+2         = 8
+3         = 
+
+            2   +
+3        -  5
+4        =  1
+
+
+If AC state follows by operator then 0 is pushed to numR.
+If AC state follows by eq then NOTHING
+Op after op replaces op only.
+If (num1) then op button does calc and then replaces op.

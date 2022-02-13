@@ -13,19 +13,22 @@ const data = {
 function btnEvent(btnValue) {
   if (typeof btnValue === "number") {
     populateDisplayObj(btnValue);
-    data.lastKey = "number";
+    data.lastKey = "num";
   } else if (btnValue === "C") {
     clearAll(); // C
     data.lastKey = "C";
   } else if (btnValue === "\u00B1" && data.lastKey === "number") {
     toggleNegative(); //plus-min
-    data.lastKey = "number";
+    data.lastKey = "neg";
   } else if (btnValue === "." && !data.displayArr.includes(".")) {
     populateDisplayObj(btnValue); //decimal
   } else if (btnValue === "=") {
-    equalBtn(btnValue); //equal
+    equalBtn(); //equal
+    data.lastKey = "eq";
   } else {
-    operatorBtn(btnValue); //one of 4 operators
+    operatorBtn();
+    data.op = btnValue;
+    data.lastKey = "op";
   }
 }
 //
@@ -45,7 +48,6 @@ function populateDisplayObj(num) {
   if (data.displayArr.length === 1 && data.displayArr[0] === 0 && num !== ".") {
     data.displayArr = [];
   }
-
   data.displayArr.push(num);
   if (data.displayArr.length > 10) {
     data.displayArr.length = 10;
@@ -60,7 +62,7 @@ function showNumbers() {
   }
 }
 //
-function equalBtn(btnValue) {
+function equalBtn() {
   if (!data.numRes && data.lastKey !== "=") {
     data.numRes = data.num1;
   }
@@ -71,25 +73,24 @@ function equalBtn(btnValue) {
   data.numRes = mathe(data.num2, data.num1, data.op);
   numberToDisplay();
   showNumbers();
-  //data.displayArr = [];
-  data.lastKey = btnValue;
 }
 //
-function operatorBtn(btnValue) {
+function operatorBtn() {
   if (data.num1 && data.lastKey !== "=") {
     data.num2 = data.num1;
+    console.log(`data.num1 && data.lastKey !== "=" => data.num2 = data.num1`);
   }
   data.num1 = displayToNumber();
   if (data.num2 && data.lastKey !== "=") {
-    data.numRes = mathe(data.num2, data.num1, btnValue);
+    data.numRes = mathe();
+    console.log(`data.num2 && data.lastKey !== "=" => data.numRes = mathe();`);
   }
   if (data.numRes && data.lastKey !== "=") {
     numberToDisplay();
+    console.log(`data.numRes && data.lastKey !== "=" numberToDisplay();`);
   }
   showNumbers();
   data.displayArr = [];
-  data.lastKey = btnValue;
-  data.op = btnValue;
 }
 //
 function displayToNumber() {
@@ -97,34 +98,35 @@ function displayToNumber() {
 }
 //
 function numberToDisplay() {
-  const arr = Array.from(data.numRes.toString()).map(Number);
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] == "-") {
-      arr[i] = "-";
-    } else if (isNaN(arr[i])) {
-      arr[i] = ".";
-    }
-  }
-  data.displayArr = arr;
+  data.displayArr = Array.from(data.numRes.toString());
 }
 //
-function mathe(num2, num1, btnValue) {
-  switch (btnValue) {
+function mathe() {
+  let result;
+  switch (data.op) {
     case "+":
-      console.log(num2 + " " + num1 + " " + (num2 + num1));
-      return num2 + num1;
+      result = data.num2 + data.num1;
+      console.log("+");
+      console.log(data);
+      break;
     case "-":
-      console.log(num2 + " " + num1 + " " + num2 - num1);
-      return num2 - num1;
+      result = data.num2 - data.num1;
+      console.log("-");
+      console.log(data);
+      break;
     case "*":
-      console.log(num2 + " " + num1 + " " + num2 * num1);
-      return num2 * num1;
+      result = data.num2 * data.num1;
+      console.log("*");
+      console.log(data);
+      break;
     case "/":
-      console.log(num2 + " " + num1 + " " + num2 / num1);
-      return num2 / num1;
-    default:
-      return null;
+      result = data.num2 / data.num1;
+      console.log("/");
+      console.log(data);
+      break;
   }
+  console.log("send");
+  return result;
 }
 //
 function clearAll() {
