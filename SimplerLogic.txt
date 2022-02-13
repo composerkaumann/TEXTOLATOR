@@ -19,3 +19,9 @@ If AC state follows by operator then 0 is pushed to numR.
 If AC state follows by eq then NOTHING
 Op after op replaces op only.
 If (num1) then op button does calc and then replaces op.
+
+
+TODO:
+
+1) rounding calc to 10 digits
+2) key events

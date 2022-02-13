@@ -18,11 +18,12 @@ function btnEvent(btnValue) {
     data.lastKey = "C";
   } else if (btnValue === "\u00B1" && data.lastKey === "num") {
     toggleNegative(); //plus-min
-    data.lastKey = "neg";
+    data.lastKey = "num";
   } else if (btnValue === "." && !data.displayArr.includes(".")) {
-    populateDisplayObj(btnValue); //decimal
+    populateDisplayObj(btnValue);
+    data.lastKey = "num";
   } else if (btnValue === "=") {
-    equalBtn(); //equal
+    equalBtn();
     data.lastKey = "eq";
   } else {
     operatorBtn();
@@ -62,12 +63,13 @@ function showNumbers() {
 }
 //
 function equalBtn() {
-  if (!data.numRes) {
+  if (data.numRes === null) {
     console.log("A");
     return;
-  } else if (!data.num1 && data.lastKey !== "num") {
+  } else if (data.num1 === null && data.lastKey !== "num") {
     console.log("B");
     data.num1 = data.numRes;
+  } else if (data.lastKey === "eq") {
   } else {
     console.log("C");
     data.num1 = displayToNumber();
