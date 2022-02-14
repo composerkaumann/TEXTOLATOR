@@ -22,7 +22,7 @@ function btnEvent(btnValue) {
   } else if (btnValue === "." && !data.displayArr.includes(".")) {
     populateDisplayArray(btnValue);
     data.lastKey = "num";
-  } else if (btnValue === "=") {
+  } else if (btnValue === "=" && data.op !== null) {
     equalBtn();
     data.lastKey = "eq";
   } else if (
@@ -73,19 +73,19 @@ function refreshDisplay() {
 //
 function equalBtn() {
   if (data.numRes === null) {
-    console.log("A");
+    console.log("eqA");
     return;
   } else if (
     data.num1 === null &&
     data.lastKey !== "num" &&
     data.lastKey !== "neg"
   ) {
-    console.log("B");
+    console.log("eqB");
     data.num1 = data.numRes;
   } else if (data.lastKey === "eq") {
-    console.log("C");
+    console.log("eqC");
   } else {
-    console.log("D");
+    console.log("eqD");
     data.num1 = displayToNumber();
   }
   data.numRes = mathe();
@@ -93,13 +93,20 @@ function equalBtn() {
 }
 //
 function operatorBtn() {
-  if (data.lastKey === "op") {
+  if (data.lastKey === "op" || data.lastKey === "eq") {
+    data.displayArr = [];
+    console.log("opA");
     return;
+  } else if (data.lastKey == "eq" && data.num1 !== null) {
+    data.numRes = mathe();
+    console.log("opB");
   } else if (data.numRes !== null) {
     data.num1 = displayToNumber();
     data.numRes = mathe();
+    console.log("opC");
   } else {
     data.numRes = displayToNumber();
+    console.log("opD");
   }
   afterCalc();
 }
@@ -109,7 +116,6 @@ function afterCalc() {
   refreshDisplay();
   data.displayArr = [];
   if (isNaN(+data.numRes)) {
-    console.log("NaN");
     data.num1 = null;
     data.numRes = null;
     data.op = null;
@@ -122,7 +128,6 @@ function displayToNumber() {
 //
 function numberToDisplay() {
   data.displayArr = Array.from(data.numRes.toString());
-  console.log(data.displayArr);
 }
 //
 function mathe() {
@@ -133,7 +138,6 @@ function mathe() {
       break;
     case "-":
       result = data.numRes - data.num1;
-
       break;
     case "*":
       result = data.numRes * data.num1;
@@ -142,16 +146,29 @@ function mathe() {
       result = data.numRes / data.num1;
       break;
   }
-  console.log(result);
+  const analyseRes = Array.from(result.toString());
+  let x = roundHowMuch(analyseRes);
   if (result === Infinity) {
-    result = "DIV. BY 0";
+    result = "DIV. BY 0!";
+  } else if (isNaN(result)) {
+    result = "NaNaNaNaaa";
   } else if (result > 9999999999) {
     result = "TOO BIG";
   } else if (result < -999999999) {
     result = "TOO SMALL ";
+  } else {
+    result = Math.round(result * x) / x;
   }
-  console.log(result);
   return result;
+}
+//
+function roundHowMuch(resultArray) {
+  const decPosition = resultArray.indexOf(".");
+  let x = 1000000000;
+  for (let i = 0; i < decPosition; i++) {
+    x = x / 10;
+  }
+  return x;
 }
 //
 function clearAll() {
@@ -162,56 +179,6 @@ function clearAll() {
   data.lastKey = null;
   refreshDisplay();
 }
-//
-// Two functions to hilight 3 active button divs (and un-hilight).
-//
-document.getElementById("calc").addEventListener(
-  "mousedown",
-  function (evt) {
-    data.clickTargetID = +evt.target.id;
-    if (evt.target.className === "btn") {
-      const twoLeft = document.getElementById(+evt.target.id - 2);
-      const oneLeft = document.getElementById(+evt.target.id - 1);
-      const clicked = document.getElementById(+evt.target.id);
-      const oneRight = document.getElementById(+evt.target.id + 1);
-      const twoRight = document.getElementById(+evt.target.id + 2);
-      if (twoLeft.classList.contains("btn")) {
-        twoLeft.classList.add("clicked");
-        oneLeft.classList.add("clicked");
-        clicked.classList.add("clicked");
-      } else if (oneLeft.classList.contains("btn")) {
-        oneLeft.classList.add("clicked");
-        clicked.classList.add("clicked");
-        oneRight.classList.add("clicked");
-      } else {
-        clicked.classList.add("clicked");
-        oneRight.classList.add("clicked");
-        twoRight.classList.add("clicked");
-      }
-    }
-  },
-  false
-);
-//
-document.body.addEventListener(
-  "mouseup",
-  function () {
-    if (
-      data.clickTargetID !== null &&
-      data.clickTargetID < 447 &&
-      data.clickTargetID > 126
-    ) {
-      const n = data.clickTargetID;
-      document.getElementById(n - 2).classList.remove("clicked");
-      document.getElementById(n - 1).classList.remove("clicked");
-      document.getElementById(n).classList.remove("clicked");
-      document.getElementById(n + 1).classList.remove("clicked");
-      document.getElementById(n + 2).classList.remove("clicked");
-      data.clickTargetID = null;
-    }
-  },
-  false
-);
 //
 // The initial state of calc when loaded, shows zero.
 //
