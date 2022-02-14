@@ -26,6 +26,8 @@ TODO:
 1) rounding calc to 10 digits
 2) = key event
 
+
+
 mathe() result.
 
 if result > 9999999999, ERROR

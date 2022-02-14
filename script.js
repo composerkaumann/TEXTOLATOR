@@ -89,9 +89,7 @@ function equalBtn() {
     data.num1 = displayToNumber();
   }
   data.numRes = mathe();
-  numberToDisplay();
-  refreshDisplay();
-  data.displayArr = [];
+  afterCalc();
 }
 //
 function operatorBtn() {
@@ -103,9 +101,18 @@ function operatorBtn() {
   } else {
     data.numRes = displayToNumber();
   }
+  afterCalc();
+}
+//
+function afterCalc() {
   numberToDisplay();
   refreshDisplay();
   data.displayArr = [];
+  if (isNaN(+data.numRes)) {
+    data.num1 = null;
+    data.numRes = null;
+    data.op = null;
+  }
 }
 //
 function displayToNumber() {
@@ -134,7 +141,11 @@ function mathe() {
       result = data.numRes / data.num1;
       break;
   }
-  // must truncate / round
+  if (result > 9999999999) {
+    result = "TOO BIG";
+  } else if (result < -999999999) {
+    result = "TOO SMALL";
+  }
   console.log(result);
   return result;
 }
