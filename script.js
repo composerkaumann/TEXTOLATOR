@@ -82,7 +82,7 @@ function equalBtn() {
   ) {
     console.log("B");
     data.num1 = data.numRes;
-  } else if (data.lastKey === "eq" || data.lastKey === "neg") {
+  } else if (data.lastKey === "eq") {
     console.log("C");
   } else {
     console.log("D");
@@ -109,6 +109,7 @@ function afterCalc() {
   refreshDisplay();
   data.displayArr = [];
   if (isNaN(+data.numRes)) {
+    console.log("NaN");
     data.num1 = null;
     data.numRes = null;
     data.op = null;
@@ -141,10 +142,13 @@ function mathe() {
       result = data.numRes / data.num1;
       break;
   }
-  if (result > 9999999999) {
+  console.log(result);
+  if (result === Infinity) {
+    result = "DIV. BY 0";
+  } else if (result > 9999999999) {
     result = "TOO BIG";
   } else if (result < -999999999) {
-    result = "TOO SMALL";
+    result = "TOO SMALL ";
   }
   console.log(result);
   return result;
