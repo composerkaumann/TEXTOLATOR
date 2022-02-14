@@ -165,3 +165,60 @@ function populateBox(arr, content, clazz) {
   });
 }
 makeBoxes();
+//
+document.addEventListener("keydown", function (event) {
+  if (event.ctrlKey || event.altKey || event.metaKey) {
+    return;
+  }
+  if (event.key === "1") {
+    btnEvent(1);
+  }
+  if (event.key === "2") {
+    btnEvent(2);
+  }
+  if (event.key === "3") {
+    btnEvent(3);
+  }
+  if (event.key === "4") {
+    btnEvent(4);
+  }
+  if (event.key === "5") {
+    btnEvent(5);
+  }
+  if (event.key === "6") {
+    btnEvent(6);
+  }
+  if (event.key === "7") {
+    btnEvent(7);
+  }
+  if (event.key === "8") {
+    btnEvent(8);
+  }
+  if (event.key === "9") {
+    btnEvent(9);
+  }
+  if (event.key === "0") {
+    btnEvent(0);
+  }
+  if (event.key === "c" || event.key === "C" || event.key === "Clear") {
+    btnEvent("C");
+  }
+  if (event.key === "+") {
+    btnEvent("+");
+  }
+  if (event.key === "-") {
+    btnEvent("-");
+  }
+  if (event.key === "*") {
+    btnEvent("*");
+  }
+  if (event.key === "/") {
+    btnEvent("/");
+  }
+  if (event.key === "." || event.key === ",") {
+    btnEvent(".");
+  }
+  if (event.key === "=" || event.key === "Enter") {
+    btnEvent("=");
+  }
+});

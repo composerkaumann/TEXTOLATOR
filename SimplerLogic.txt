@@ -24,4 +24,12 @@ If (num1) then op button does calc and then replaces op.
 TODO:
 
 1) rounding calc to 10 digits
-2) key events
+2) = key event
+
+mathe() result.
+
+if result > 9999999999, ERROR
+if result < -999999999, ERROR
+
+IF the result is negative, then 9 digits, ELSE 10 digits
+

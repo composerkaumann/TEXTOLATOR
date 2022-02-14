@@ -11,21 +11,26 @@ const data = {
 //
 function btnEvent(btnValue) {
   if (typeof btnValue === "number") {
-    populateDisplayObj(btnValue);
+    populateDisplayArray(btnValue);
     data.lastKey = "num";
   } else if (btnValue === "C") {
     clearAll(); // C
     data.lastKey = "C";
   } else if (btnValue === "\u00B1" && data.lastKey === "num") {
     toggleNegative(); //plus-min
-    data.lastKey = "num";
+    data.lastKey = "neg";
   } else if (btnValue === "." && !data.displayArr.includes(".")) {
-    populateDisplayObj(btnValue);
+    populateDisplayArray(btnValue);
     data.lastKey = "num";
   } else if (btnValue === "=") {
     equalBtn();
     data.lastKey = "eq";
-  } else {
+  } else if (
+    btnValue === "+" ||
+    btnValue === "-" ||
+    btnValue === "/" ||
+    btnValue === "*"
+  ) {
     operatorBtn();
     data.op = btnValue;
     data.lastKey = "op";
@@ -41,21 +46,25 @@ function toggleNegative() {
   if (data.displayArr.length > 10) {
     data.displayArr.length = 10;
   }
-  showNumbers();
+  refreshDisplay();
 }
 //
-function populateDisplayObj(num) {
+function populateDisplayArray(num) {
   if (data.displayArr.length === 1 && data.displayArr[0] === 0 && num !== ".") {
     data.displayArr = [];
+    console.log(".A");
+  } else if (num === "." && data.lastKey !== "num" && data.lastKey !== "neg") {
+    data.displayArr = [0];
+    console.log(".B");
   }
   data.displayArr.push(num);
   if (data.displayArr.length > 10) {
     data.displayArr.length = 10;
   }
-  showNumbers();
+  refreshDisplay();
 }
 //
-function showNumbers() {
+function refreshDisplay() {
   for (let i = 0; i < 10; i++) {
     document.getElementById(71 - i * 2).textContent =
       data.displayArr[data.displayArr.length - 1 - i];
@@ -66,17 +75,22 @@ function equalBtn() {
   if (data.numRes === null) {
     console.log("A");
     return;
-  } else if (data.num1 === null && data.lastKey !== "num") {
+  } else if (
+    data.num1 === null &&
+    data.lastKey !== "num" &&
+    data.lastKey !== "neg"
+  ) {
     console.log("B");
     data.num1 = data.numRes;
-  } else if (data.lastKey === "eq") {
-  } else {
+  } else if (data.lastKey === "eq" || data.lastKey === "neg") {
     console.log("C");
+  } else {
+    console.log("D");
     data.num1 = displayToNumber();
   }
   data.numRes = mathe();
   numberToDisplay();
-  showNumbers();
+  refreshDisplay();
   data.displayArr = [];
 }
 //
@@ -90,7 +104,7 @@ function operatorBtn() {
     data.numRes = displayToNumber();
   }
   numberToDisplay();
-  showNumbers();
+  refreshDisplay();
   data.displayArr = [];
 }
 //
@@ -104,7 +118,7 @@ function numberToDisplay() {
 }
 //
 function mathe() {
-  let result: number;
+  let result;
   switch (data.op) {
     case "+":
       result = data.numRes + data.num1;
@@ -120,6 +134,8 @@ function mathe() {
       result = data.numRes / data.num1;
       break;
   }
+  // must truncate / round
+  console.log(result);
   return result;
 }
 //
@@ -129,7 +145,7 @@ function clearAll() {
   data.numRes = null;
   data.op = null;
   data.lastKey = null;
-  showNumbers();
+  refreshDisplay();
 }
 //
 // Two functions to hilight 3 active button divs (and un-hilight).
@@ -184,4 +200,4 @@ document.body.addEventListener(
 //
 // The initial state of calc when loaded, shows zero.
 //
-showNumbers();
+refreshDisplay();

@@ -18,14 +18,19 @@ function btnEvent(btnValue) {
     data.lastKey = "C";
   } else if (btnValue === "\u00B1" && data.lastKey === "num") {
     toggleNegative(); //plus-min
-    data.lastKey = "num";
+    data.lastKey = "neg";
   } else if (btnValue === "." && !data.displayArr.includes(".")) {
     populateDisplayArray(btnValue);
     data.lastKey = "num";
   } else if (btnValue === "=") {
     equalBtn();
     data.lastKey = "eq";
-  } else {
+  } else if (
+    btnValue === "+" ||
+    btnValue === "-" ||
+    btnValue === "/" ||
+    btnValue === "*"
+  ) {
     operatorBtn();
     data.op = btnValue;
     data.lastKey = "op";
@@ -47,8 +52,10 @@ function toggleNegative() {
 function populateDisplayArray(num) {
   if (data.displayArr.length === 1 && data.displayArr[0] === 0 && num !== ".") {
     data.displayArr = [];
-  } else if (num === ".") {
+    console.log(".A");
+  } else if (num === "." && data.lastKey !== "num" && data.lastKey !== "neg") {
     data.displayArr = [0];
+    console.log(".B");
   }
   data.displayArr.push(num);
   if (data.displayArr.length > 10) {
@@ -68,12 +75,17 @@ function equalBtn() {
   if (data.numRes === null) {
     console.log("A");
     return;
-  } else if (data.num1 === null && data.lastKey !== "num") {
+  } else if (
+    data.num1 === null &&
+    data.lastKey !== "num" &&
+    data.lastKey !== "neg"
+  ) {
     console.log("B");
     data.num1 = data.numRes;
-  } else if (data.lastKey === "eq") {
-  } else {
+  } else if (data.lastKey === "eq" || data.lastKey === "neg") {
     console.log("C");
+  } else {
+    console.log("D");
     data.num1 = displayToNumber();
   }
   data.numRes = mathe();
@@ -123,6 +135,7 @@ function mathe() {
       break;
   }
   // must truncate / round
+  console.log(result);
   return result;
 }
 //
