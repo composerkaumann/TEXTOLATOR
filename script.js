@@ -14,10 +14,10 @@ function btnEvent(btnValue) {
     populateDisplayArray(btnValue);
     data.lastKey = "num";
   } else if (btnValue === "C") {
-    clearAll(); // C
+    clearAll();
     data.lastKey = "C";
   } else if (btnValue === "\u00B1" && data.lastKey === "num") {
-    toggleNegative(); //plus-min
+    toggleNegative();
     data.lastKey = "neg";
   } else if (btnValue === "." && !data.displayArr.includes(".")) {
     populateDisplayArray(btnValue);
@@ -52,10 +52,8 @@ function toggleNegative() {
 function populateDisplayArray(num) {
   if (data.displayArr.length === 1 && data.displayArr[0] === 0 && num !== ".") {
     data.displayArr = [];
-    console.log(".A");
   } else if (num === "." && data.lastKey !== "num" && data.lastKey !== "neg") {
     data.displayArr = [0];
-    console.log(".B");
   }
   data.displayArr.push(num);
   if (data.displayArr.length > 10) {
@@ -73,19 +71,15 @@ function refreshDisplay() {
 //
 function equalBtn() {
   if (data.numRes === null) {
-    console.log("eqA");
     return;
   } else if (
     data.num1 === null &&
     data.lastKey !== "num" &&
     data.lastKey !== "neg"
   ) {
-    console.log("eqB");
     data.num1 = data.numRes;
   } else if (data.lastKey === "eq") {
-    console.log("eqC");
   } else {
-    console.log("eqD");
     data.num1 = displayToNumber();
   }
   data.numRes = mathe();
@@ -95,18 +89,14 @@ function equalBtn() {
 function operatorBtn() {
   if (data.lastKey === "op" || data.lastKey === "eq") {
     data.displayArr = [];
-    console.log("opA");
     return;
   } else if (data.lastKey == "eq" && data.num1 !== null) {
     data.numRes = mathe();
-    console.log("opB");
   } else if (data.numRes !== null) {
     data.num1 = displayToNumber();
     data.numRes = mathe();
-    console.log("opC");
   } else {
     data.numRes = displayToNumber();
-    console.log("opD");
   }
   afterCalc();
 }
