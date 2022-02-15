@@ -2,6 +2,8 @@
 
 #### The calculator that uses div grid and is text-only.
 
+https://learning.music.ee/calc
+
 ## Goals;
 
 - find the way to compose the layout pattern and populate divs with necessary characters
