@@ -143,9 +143,9 @@ function mathe() {
   } else if (isNaN(result)) {
     result = "NaNaNaNaaa";
   } else if (result > 9999999999) {
-    result = "TOO BIG";
+    result = "TOO  BIG ";
   } else if (result < -999999999) {
-    result = "TOO SMALL ";
+    result = "TOO  SMALL";
   } else {
     result = Math.round(result * x) / x;
   }
