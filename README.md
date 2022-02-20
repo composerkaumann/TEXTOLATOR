@@ -4,14 +4,16 @@
 
 https://learning.music.ee/calc
 
-## Goals;
+## Goals
 
 - find the way to compose the layout pattern and populate divs with necessary characters
 - compose the calculator layout entirely with text (monospace) and 25x20 css grid
-- make the the layout dynamically scalable (using font-height: 3vh)
+- make the the layout dynamically scalable in real-time
 - define buttons with 3 adjacent divs, also active state hilight
+  -- un-hilight buttons also when while mouse down the cursor moves away from button
+  -- TODO: how to un-hilight when mouse in down state moves out of browser window and then is released?
 - make the keyboard work
-- rounding: find a way to analyse the result and round the number dynamically accordingly to fitthe display
+- rounding: find a way to analyse the result and round the number dynamically accordingly to fit the display
 - find the way to populate the display divs
 - make logic work in different case scenarios and key sequences
 
