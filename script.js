@@ -132,7 +132,7 @@ function mathe() {
   }
   const analyseRes = Array.from(result.toString());
   let x = roundHowMuch(analyseRes);
-  if (result === Infinity) {
+  if (result === Infinity || result === -Infinity) {
     result = "DIV. BY 0!";
   } else if (isNaN(result)) {
     result = "NaNaNaNaaa";
