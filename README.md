@@ -1,6 +1,6 @@
 # TEXTOLATOR
 
-#### The calculator that uses div grid and is text-only.
+#### The calculator that uses div grid layout and is text-only.
 
 https://learning.music.ee/calc
 
