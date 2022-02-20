@@ -72,13 +72,9 @@ function refreshDisplay() {
 function equalBtn() {
   if (data.numRes === null) {
     return;
-  } else if (
-    data.num1 === null &&
-    data.lastKey !== "num" &&
-    data.lastKey !== "neg"
-  ) {
-    data.num1 = data.numRes;
   } else if (data.lastKey === "eq") {
+  } else if (data.lastKey === "op") {
+    data.num1 = data.numRes;
   } else {
     data.num1 = displayToNumber();
   }
@@ -89,14 +85,15 @@ function equalBtn() {
 function operatorBtn() {
   if (data.lastKey === "op" || data.lastKey === "eq") {
     data.displayArr = [];
+    console.log("op A");
     return;
-  } else if (data.lastKey == "eq" && data.num1 !== null) {
-    data.numRes = mathe();
   } else if (data.numRes !== null) {
     data.num1 = displayToNumber();
     data.numRes = mathe();
+    console.log("op B");
   } else {
     data.numRes = displayToNumber();
+    console.log("op C");
   }
   afterCalc();
 }
