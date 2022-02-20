@@ -16,7 +16,10 @@ function btnEvent(btnValue) {
   } else if (btnValue === "C") {
     clearAll();
     data.lastKey = "C";
-  } else if (btnValue === "\u00B1" && data.lastKey === "num") {
+  } else if (
+    btnValue === "\u00B1" &&
+    (data.lastKey === "num" || data.lastKey === "neg")
+  ) {
     toggleNegative();
     data.lastKey = "neg";
   } else if (btnValue === "." && !data.displayArr.includes(".")) {
