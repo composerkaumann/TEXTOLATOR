@@ -40,7 +40,6 @@ function createBtn(middleDivId, btnValue) {
     occ.addEventListener(
       "mousedown",
       function () {
-        // Typescript error because function in another file
         btnEvent(btnValue);
       },
       false
@@ -223,7 +222,7 @@ document.addEventListener("keydown", function (event) {
   }
 });
 //
-// Two functions to hilight 3 active button divs (and un-hilight).
+// Two functions to hilight 3 active button divs.
 //
 document.getElementById("calc").addEventListener(
   "mousedown",
@@ -253,6 +252,8 @@ document.getElementById("calc").addEventListener(
   false
 );
 //
+// Un-hilight buttons on mouseup, also when mouse has moved out of button.
+//
 document.body.addEventListener(
   "mouseup",
   function () {
@@ -267,7 +268,7 @@ document.body.addEventListener(
       document.getElementById(n).classList.remove("clicked");
       document.getElementById(n + 1).classList.remove("clicked");
       document.getElementById(n + 2).classList.remove("clicked");
-      data.clickTargetID = null;
+      data.clickTargetID = null; // data object in script.js
     }
   },
   false
