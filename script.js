@@ -85,15 +85,12 @@ function equalBtn() {
 function operatorBtn() {
   if (data.lastKey === "op" || data.lastKey === "eq") {
     data.displayArr = [];
-    console.log("op A");
     return;
   } else if (data.numRes !== null) {
     data.num1 = displayToNumber();
     data.numRes = mathe();
-    console.log("op B");
   } else {
     data.numRes = displayToNumber();
-    console.log("op C");
   }
   afterCalc();
 }
